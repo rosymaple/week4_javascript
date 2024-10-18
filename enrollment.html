@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <p>How many credits are you taking this semester></p>
+    <input type="text" id="credit-count">       <!-- user can input text here -->
+    <button id="submit-credits">Save</button>       <!-- display save button for user -->
+
+    <p id="status-message"></p>     <!-- display status message for user here -->
+
+<script>
+  let submitButton = document.querySelector('#submit-credits')
+  let creditsInput = document.querySelector('#credit-count')
+  let statusMessage = document.querySelector('#status-message')
+
+  submitButton.addEventListener('click', function() {       // add event listener for submitButton
+      // use .value to parse the #credit-count digit into our script
+      let credits = creditsInput.value
+
+    if (credits > 24) {     // use if statements to display credit statuses to user
+      statusMessage.innerHTML = 'You are enrolled in too many classes.'
+    } else if (credits >= 12) {
+      statusMessage.innerHTML = 'You are enrolled as a full time student.'
+    } else if (credits >= 6) {
+      statusMessage.innerHTML = 'You are enrolled as a half time student.'
+    } else if (credits >= 0) {
+      statusMessage.innerHTML = 'You are enrolled less than half time.'
+    } else {
+      statusMessage.innerHTML = 'You are not taking any classes.'
+    }       // end of if-else block
+  })        // end of event listener
+
+</script>       <!-- end of script -->
+
+</body>
+</html>

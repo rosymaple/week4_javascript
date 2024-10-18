@@ -13,7 +13,7 @@
         <button id="correct-answer">Madison</button>
         <button class="wrong-answer">Milwaukee</button>
 
-        <p id="result"></p>
+        <p id="result"></p>     <!-- display result the user here -->
 
 <script>
 
@@ -41,28 +41,21 @@
     for (let x=0 ; x< wrongAnswerButtons.length; x++) {
         let wrongAnswerButton = wrongAnswerButtons[x]
 
-        wrongAnswerButton.addEventListener('click', function() {
-            result.innerHTML = 'Wrong answer. Try again?'
-            correctAnswerButton.style.background = defaultButtonColor
-        })
+        wrongAnswerButton.addEventListener('click', function() {        // add event listener for wrong answers clicked
+            result.innerHTML = 'Wrong answer. Try again?'       // display if wrong answer was clicked
+            correctAnswerButton.style.background = defaultButtonColor   // use javascript to display color style
+        })      // end of event listener for wrong answer buttons
 
-    }
+    }       // end of for loop on the length of all wrong answer buttons in that array
 
 
     // add event listener to one correct answer button
-    correctAnswerButton.addEventListener('click', function() {
-        result.innerHTML = 'Correct answer!'
-        correctAnswerButton.style.background = 'cyan'
-    })
-
-
-
-
-
+    correctAnswerButton.addEventListener('click', function() {      // add event listener for the correct answer
+        result.innerHTML = 'Correct answer!'        // display message for user
+        correctAnswerButton.style.background = 'cyan'       //use style.background to make button color blue
+    })      // end of event listener for the correct answer
 
 </script>
-
-
 
 </body>
 </html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Club Membership</title>
+
+  <style>
+
+    .selected {
+      text-decoration: line-through ;
+      font-style: italic;
+      color: gray;
+    }
+
+    input {
+      width: 100%;
+      padding: 5px;
+      margin: 5px 5px 5px 0px;
+      box-sizing: border-box;
+
+    }
+
+  </style>
+
+</head>
+<body>
+
+<h1>Student Club Roster</h1>
+
+<h2>Add Students</h2>
+
+<label for="student-name">Student Name</label><input id="student-name" name="student-name">
+<br>
+<label for="student-id">Student ID</label><input id="student-id" name="student-id">
+<br>
+<label for="student-gpa">Student GPA</label><input id="student-gpa" name="student-gpa" type="number">
+<br>
+<button id="add-student">Add Student</button>
+
+<h2>Student List</h2>
+
+<p>There are
+  <span id="student-count">
+          <!-- use JavaScript to count the number of students, and show here -->
+        </span>
+  student(s) in the club.</p>
+
+<p>Click on a student's name to select them</p>
+
+<ul id="student-list">
+  <!-- use JavaScript to create li elements  -->
+</ul>
+
+<button id="remove-selected-students">Remove selected students</button>
+
+<script>
+
+  // define our student count for script
+  let studentCount = document.querySelector('#student-count')
+  // initialize studentCount number for script at 0
+  studentCount.textContent = 0
+
+  // add event listener upon clicking add student button
+  let addStudent = document.querySelector('#add-student')
+
+  addStudent.addEventListener('click', function() {   // start of add student event listener
+    // define elements for our event listener using HTML selectors...
+    let nameInput = document.querySelector('#student-name')
+    let idInput = document.querySelector('#student-id')
+    let gpaInput = document.querySelector('#student-gpa')
+
+    // define variables for script to write a template for information on each student
+    let studentName = nameInput.value.trim()
+    let studentID = idInput.value.trim()
+    // use parseFloat to convert 'string' input to a number for our script
+    let studentGPA = parseFloat(gpaInput.value)
+
+    if (!studentName) {   // if no student name is entered...
+      alert('Enter name.')    // display alert
+      return    // return so no-name entry does not submit
+    }
+
+    if (!studentID) {   // if no student ID is entered...
+      alert('Enter student ID')   // display alert
+      return    // return so blank entry does not submit
+    }
+
+    if (isNaN(studentGPA) || studentGPA < 0 || studentGPA > 4) {    // if parameters for GPA are not followed...
+      alert('Please enter a valid GPA between 0 and 4.')    // display alert
+      return    // return so entry does not submit
+    }
+
+    // define newListItem using .createElement method
+    let newListItem = document.createElement('li');
+    // use template string on newListItem to create individual unordered list elements
+    newListItem.innerHTML = `${studentName}, id: ${studentID}, GPA: ${studentGPA.toFixed(1)}`;
+    // 3 variables in template string to display name/id/gpa for each student
+
+    // add event listener on click
+    newListItem.addEventListener('click', function() {
+      // 'this' refers to newListItem...
+      // classList shows a live list of the class attributes of an element.
+      // using toggle method to check if item in class is selected or not.
+      this.classList.toggle('selected')
+    })    // end of event listener to add new list item.
+
+    // add new unordered list element to #student-list using .appendChild
+    document.querySelector('#student-list').appendChild(newListItem)
+
+    // update the number for our #student-count using .length method
+    studentCount.textContent = document.querySelectorAll('#student-list li').length
+
+    // variables defined for removing students button
+    nameInput.value='';   // blank value
+    idInput.value='';     // blank value
+    gpaInput.value='';    // blank value
+  })  // end of addStudent event listener
+
+  // add event listener to remove students
+  // define removeStudent for our event listener script
+  let removeStudent = document.querySelector('#remove-selected-students')
+
+  removeStudent.addEventListener('click', function() {
+    // use an event listener to remove student from #student-list
+    let selectedStudents = document.querySelectorAll('#student-list .selected')
+    // define selected students for our event listener to handle...
+    // use forEach method on iterate over an array of students...
+    selectedStudents.forEach(function(student) {
+      student.remove();   // remove each student selected
+    })    // end of removeStudent event listener for remove selected students button
+
+    // Update student count number using querySelectorAll over student-list array
+    studentCount.textContent = document.querySelectorAll('#student-list li').length
+  })
+
+</script>   <!-- end of script -->
+
+</body>
+</html>

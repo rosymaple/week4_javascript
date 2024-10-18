@@ -14,35 +14,25 @@
   let mouseCount = 0
 
   // Write your script here
-  let message = document.querySelector('#mouse-me')
+  let message = document.querySelector('#mouse-me')     // use querySelector on paragraph id "mouse-me"
 
-  message.addEventListener('mouseover', function() {
-    mouseCount++
-    if (mouseCount == 1) {
+  message.addEventListener('mouseover', function() {    // use mouseover on message (mouse-me)...
+      // by adding an event listener
+    mouseCount++        // auto add +1 to mouseCount variable
+    if (mouseCount == 1) {      // use if statement to print proper grammar for user
       message.innerHTML = 'Mouse has been here ' + mouseCount + ' time.'
-    } else {
+    } else {        // if-else statement
       message.innerHTML = 'Mouse has been here ' + mouseCount + ' times'   // modify message to include mouseCount
-    }
-  })
+    }   // end of if-else block
+  })        // end of event listener
 
-  message.addEventListener('mouseout', function() {
-    message.innerHTML = ('Your mouse is not on this message')
-  })
-
-
-
-
-
+  message.addEventListener('mouseout', function() {     // add event listener onto message ("#mouse-me")
+    message.innerHTML = ('Your mouse is not on this message')       // display message for the user using .innerHTML
+  })        // end of event listener for mouseout
 
 
 
 </script>
-
-
-
-
-
-
 
 </body>
 </html>
